@@ -5,7 +5,7 @@ python:
 # install python dependencies including this package in the travis
 # virtualenv
 install:
-  - pip install -r requirements/python
+  - pip install -r requirements/python-dev
 
 # commands to run the testing suite. if any of these fail, travic lets us know
 script:
