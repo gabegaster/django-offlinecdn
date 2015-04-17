@@ -1,0 +1,18 @@
+language: python
+python:
+  - "2.7"
+
+# install python dependencies including this package in the travis
+# virtualenv
+install:
+  - pip install -r requirements/python
+
+# commands to run the testing suite. if any of these fail, travic lets us know
+script:
+  - nosetests --with-coverage --cover-package=offlinecdn
+  - pep8 offlinecdn/
+  - cd docs && make html && cd -
+
+# commands to run after the tests successfully complete
+after_success:
+  - coveralls
