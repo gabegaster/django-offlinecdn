@@ -11,7 +11,7 @@ install:
 script:
   - nosetests --with-coverage --cover-package=offlinecdn
   - pep8 offlinecdn/
-  - cd docs && make html && cd -
+#  - cd docs && make html && cd -
 
 # commands to run after the tests successfully complete
 after_success:
