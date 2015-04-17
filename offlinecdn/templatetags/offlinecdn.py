@@ -107,7 +107,7 @@ class OfflineCdnNode(template.Node):
         # we try and download some stuff
         if url_value.startswith('//'):
             url_value = 'http:' + url_value
-            
+
         # download the file and store it locally
         response = requests.get(url_value, stream=True)
         if not response.ok:
@@ -116,7 +116,4 @@ class OfflineCdnNode(template.Node):
             for line in response.iter_lines():
                 if line:
                     stream.write(line)
-                    
-        
-
 # make sure to add a test for //
