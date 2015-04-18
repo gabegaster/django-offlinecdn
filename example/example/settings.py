@@ -48,3 +48,7 @@ OFFLINECDN_STATIC_ROOT = os.path.join(BASE_DIR, '.offlinecdn')
 STATICFILES_DIRS = (
     OFFLINECDN_STATIC_ROOT,
 )
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
