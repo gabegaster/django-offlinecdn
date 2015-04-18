@@ -10,6 +10,7 @@ import yaml
 from colors import green, red
 
 root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+root_dir = os.path.join(root_dir, "..")
 def run_test(command):
     wrapped_command = "cd %s && %s" % (root_dir, command)
     pipe = subprocess.Popen(
