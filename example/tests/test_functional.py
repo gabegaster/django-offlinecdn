@@ -7,9 +7,10 @@ from django.template.base import VariableNode
 
 from offlinecdn.conf import settings
 
+
 class StaticTest(LiveServerTestCase):
     browser = None
-    host = "http://localhost:8081"
+    host = "http://localhost:8081"   # the LiveServerTestCase default
 
     def setUp(self):
         self.browser = webdriver.Firefox()
