@@ -8,7 +8,7 @@ import offlinecdn
 with open("README.rst") as stream:
     long_description = stream.read()
 
-github_url='https://github.com/gabegaster/scrubadub'
+github_url = 'https://github.com/gabegaster/django-offlinecdn'
 
 # read in the dependencies from the virtualenv requirements file
 dependencies = []
@@ -20,8 +20,8 @@ with open(filename, 'r') as stream:
             dependencies.append(package)
 
 setup(
-    name=scrubadub.__name__,
-    version=scrubadub.VERSION,
+    name=offlinecdn.__name__,
+    version=offlinecdn.VERSION,
     description="",
     long_description=long_description,
     url=github_url,
