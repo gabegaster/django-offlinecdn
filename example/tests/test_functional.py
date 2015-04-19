@@ -13,6 +13,7 @@ class StaticTest(LiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
+        settings.OFFLINECDN_MODE = True
 
     def test_server_running(self):
         r = requests.get(self.host)
