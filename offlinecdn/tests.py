@@ -3,6 +3,7 @@ import os
 import shutil
 
 from django.template import Template, Context, TemplateSyntaxError
+
 from offlinecdn.conf import settings
 from offlinecdn.templatetags.offlinecdn import OfflineCdnNode
 

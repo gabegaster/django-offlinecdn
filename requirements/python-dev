@@ -13,3 +13,5 @@ nose
 # for documentation
 sphinx
 sphinx_rtd_theme
+
+selenium
