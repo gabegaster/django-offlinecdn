@@ -118,4 +118,3 @@ class OfflineCdnNode(template.Node):
             for line in response.iter_lines():
                 if line:
                     stream.write(line)
-# make sure to add a test for //
