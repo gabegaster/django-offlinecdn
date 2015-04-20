@@ -7,7 +7,7 @@ from django.template import Template, Context, TemplateSyntaxError
 from offlinecdn.conf import settings
 from offlinecdn.templatetags.offlinecdn import OfflineCdnNode
 
-cached_dir = settings.OFFLINE_STATIC_ROOT
+cached_dir = settings.OFFLINECDN_STATIC_ROOT
 
 
 class CssTest(TestCase):

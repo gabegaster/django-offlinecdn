@@ -2,3 +2,4 @@
 *~
 example/.offlinecdn/
 .coverage
+db.sqlite3
