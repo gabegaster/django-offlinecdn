@@ -78,16 +78,15 @@ class OfflineCdnNode(template.Node):
         return url_value
 
     def reformat_url(self, url_value):
-        """strip the scheme and domain from the url object and append
-        the path to OFFLINE_STATIC_URL.
-
+        """strip the scheme and domain from the url object and append the path
+        to OFFLINECDN_STATIC_URL.
         """
         url = urlparse.urlparse(url_value)
         if url.scheme or url.netloc:
             urlparts = list(url)
             urlparts[0] = urlparts[1] = ""
             urlparts[2] = self.strip_leading_slash(urlparts[2])
-            urlparts[2] = settings.OFFLINE_STATIC_URL + urlparts[2]
+            urlparts[2] = settings.OFFLINECDN_STATIC_URL + urlparts[2]
             url = urlparse.ParseResult(*urlparts)
         return url.geturl()
 
@@ -99,7 +98,7 @@ class OfflineCdnNode(template.Node):
         # check if the file has already been downloaded locally
         path_string = self.strip_leading_slash(urlparts[2])
         local_path = os.path.join(*path_string.split("/"))
-        local_path = os.path.join(settings.OFFLINE_STATIC_ROOT, local_path)
+        local_path = os.path.join(settings.OFFLINECDN_STATIC_ROOT, local_path)
         if os.path.exists(local_path):
             return
         else:
