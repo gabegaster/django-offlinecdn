@@ -13,14 +13,10 @@ register = template.Library()
 
 @register.tag
 def offlinecdn(parser, token):
-    """this is the compiler for the CustomTemplateTag. It will read until
-endofflinecdn and, IF debug=True, will do the following:
+    """this is the compiler for the CustomTemplateTag. It reads in until
+    ``endofflinecdn`` and then renders each node.
 
-- check to see if the cdn file is local
-- if it's not, download it
-- change the dom to reference the downloaded file
-
-"""
+    """
     nodelist = parser.parse(('endofflinecdn',))
     tag_declaration = token.split_contents()
     if len(tag_declaration) != 2 or tag_declaration[1] not in ('css', 'js'):
@@ -33,7 +29,11 @@ endofflinecdn and, IF debug=True, will do the following:
 
 
 class OfflineCdnNode(template.Node):
-    """
+    """IF OFFLINECDN_MODE=True, will do the following:
+
+    - check to see if the cdn file is local
+    - if it's not, download it
+    - change the dom to reference the downloaded file
     """
 
     def __init__(self, css_or_js, nodelist):
@@ -58,9 +58,10 @@ class OfflineCdnNode(template.Node):
         return self.process_tags(soup, "script", "src")
 
     def process_tags(self, soup, tag_name, tag_attr):
-        """Check to see if ``tag_name`` is cached locally and cache it, if not.
-        Then, modify attribute ``tag_attr`` in each HTML tag ``tag_name`` from
-        ``soup``.
+        """Check to see if ``tag_name`` is cached locally and cache it, if
+        not.  Then, modify attribute ``tag_attr`` in each HTML tag
+        ``tag_name`` from ``soup``.
+
         """
         for tag in soup.find_all(tag_name):
             url_value = tag[tag_attr]
@@ -116,7 +117,3 @@ class OfflineCdnNode(template.Node):
             for line in response.iter_lines():
                 if line:
                     stream.write(line)
-
-
-
-# make sure to add a test for //
