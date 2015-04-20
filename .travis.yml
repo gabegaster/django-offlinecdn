@@ -2,21 +2,20 @@ language: python
 python:
   - "2.7"
 
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+
 # install python dependencies including this package in the travis
 # virtualenv
 install:
   - pip install -r requirements/python-dev
-
-before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
 
 # commands to run the testing suite. if any of these fail, travic lets us know
 script:
   - python example/manage.py test example/offlinecdn
   - python example/manage.py test example/tests
   - pep8 offlinecdn/
-#  - cd docs && make html && cd -
 
 # commands to run after the tests successfully complete
 after_success:
