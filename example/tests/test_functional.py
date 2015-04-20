@@ -1,14 +1,14 @@
 from selenium import webdriver
 import requests
 from bs4 import BeautifulSoup
-from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.template import Context, Template
 from django.template.base import VariableNode
 
 from offlinecdn.conf import settings
 
 
-class StaticTest(LiveServerTestCase):
+class StaticTest(StaticLiveServerTestCase):
     browser = None
     host = "http://localhost:8081"   # the LiveServerTestCase default
 
