@@ -18,14 +18,8 @@ def offlinecdn(parser, token):
 
     """
     nodelist = parser.parse(('endofflinecdn',))
-    tag_declaration = token.split_contents()
-    if len(tag_declaration) != 2 or tag_declaration[1] not in ('css', 'js'):
-        raise template.TemplateSyntaxError(
-            "offlinecdn takes exactly 1 argument (e.g. css or js)"
-        )
-    css_or_js = tag_declaration[1]
     parser.delete_first_token()
-    return OfflineCdnNode(css_or_js, nodelist)
+    return OfflineCdnNode(nodelist)
 
 
 class OfflineCdnNode(template.Node):
@@ -36,8 +30,7 @@ class OfflineCdnNode(template.Node):
     - change the dom to reference the downloaded file
     """
 
-    def __init__(self, css_or_js, nodelist):
-        self.language = css_or_js
+    def __init__(self, nodelist):
         self.nodelist = nodelist
 
     def render(self, context):
@@ -46,10 +39,9 @@ class OfflineCdnNode(template.Node):
             return html
 
         soup = BeautifulSoup(html)
-        if self.language == 'css':
-            return self.process_link_tags(soup)
-        else:
-            return self.process_script_tags(soup)
+        soup = self.process_link_tags(soup)
+        soup = self.process_script_tags(soup)
+        return soup.prettify()
 
     def process_link_tags(self, soup):
         return self.process_tags(soup, "link", "href")
@@ -67,7 +59,7 @@ class OfflineCdnNode(template.Node):
             url_value = tag[tag_attr]
             self.cache_if_necessary(url_value)
             tag[tag_attr] = self.reformat_url(url_value)
-        return soup.prettify()
+        return soup
 
     def strip_leading_slash(self, url_value):
         """remove the leading slash on the url to be compatible with the
