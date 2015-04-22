@@ -84,21 +84,24 @@ class OfflineCdnNode(template.Node):
         url = urlparse.urlparse(url_value)
         if url.scheme or url.netloc:
             urlparts = list(url)
-            urlparts[0] = urlparts[1] = ""
-            urlparts[2] = self.strip_leading_slash(urlparts[2])
-            urlparts[2] = settings.OFFLINECDN_STATIC_URL + urlparts[2]
+            urlparts[0] = ""
             url = urlparse.ParseResult(*urlparts)
         return url.geturl()
 
-    def cache_if_necessary(self, url_value):
-
-        url = urlparse.urlparse(url_value)
+    def get_path(self, url):
         urlparts = list(url)
+        url_string = "".join(urlparts[1:3])
 
         # check if the file has already been downloaded locally
-        path_string = self.strip_leading_slash(urlparts[2])
+        path_string = self.strip_leading_slash(url_string)
         local_path = os.path.join(*path_string.split("/"))
-        local_path = os.path.join(settings.OFFLINECDN_STATIC_ROOT, local_path)
+        local_path = os.path.join(settings.OFFLINECDN_STATIC_ROOT,
+                                  local_path)
+        return local_path
+
+    def cache_if_necessary(self, url_value):
+        url = urlparse.urlparse(url_value)
+        local_path = self.get_path(url)
         if os.path.exists(local_path):
             return
         else:

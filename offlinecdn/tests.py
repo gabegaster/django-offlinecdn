@@ -18,7 +18,7 @@ class CssTest(TestCase):
 
     def test_cached(self):
         rendered = self.get_template().render(Context({}))
-        self.assertNotIn("cdnjs", rendered)
+        self.assertNotIn("http", rendered)
         self.assertTrue(os.path.exists(cached_dir))
         node = OfflineCdnNode("", "")
         node.reformat_url((self.cdn + self.package)[1:-1])
@@ -80,7 +80,7 @@ class TwoPackageTest(JsTest):
 
     def test_cached(self):
         rendered = self.get_template().render(Context({}))
-        self.assertNotIn("cdnjs", rendered)
+        self.assertNotIn("http", rendered)
         self.assertTrue(os.path.exists(cached_dir))
 
 
@@ -91,7 +91,7 @@ class OfflineTests(TestCase):
     def test_reformatted(self):
         node = OfflineCdnNode("", "")
         reformatted = node.reformat_url((self.cdn + self.package)[1:-1])
-        self.assertNotIn("cdnjs", reformatted)
+        self.assertNotIn("http", reformatted)
 
     def test_bad_template(self):
         moment = 'moment.js/2.10.2/moment.min.js"'
