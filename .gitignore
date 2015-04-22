@@ -1,5 +1,6 @@
 *.pyc
 *~
 example/.offlinecdn/
+example/static
 .coverage
 db.sqlite3
