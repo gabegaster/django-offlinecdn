@@ -9,17 +9,18 @@ github_url = 'https://github.com/gabegaster/django-offlinecdn'
 
 def read(fname):
     with open(os.path.join(os.path.dirname(__file__), fname)) as f:
-        return f.read()
+        return f.readlines()
 
 # read in the description from README
-long_description = read("README.rst")
+long_description = "\n".join(read("README.rst"))
 
 # read in the dependencies from the virtualenv requirements file
-dependencies = [
-    "Django==1.8",
-    "beautifulsoup4",
-    "requests",
-]
+dependencies = []
+filename = os.path.join("requirements", "python")
+for line in read(filename):
+    package = line.strip().split('#')[0]
+    if package:
+        dependencies.append(package)
 
 setup(
     name="django-offlinecdn",
