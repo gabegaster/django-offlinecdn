@@ -5,7 +5,7 @@ from setuptools import setup
 import offlinecdn
 
 # read in the description from README
-with open("README.md") as stream:
+with open("README.rst") as stream:
     long_description = stream.read()
 
 github_url = 'https://github.com/gabegaster/django-offlinecdn'
