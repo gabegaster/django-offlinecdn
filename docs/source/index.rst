@@ -45,8 +45,8 @@ example
 -------
 
 With ``offlinecdn``, sourcing javascript and css from cdn's is easy!
-You do exactly what you would normally do -- just wrap any ``link``s or
-``source``s in the ``offlinecdn`` tag.
+You do exactly what you would normally do -- just wrap any ``link`` s or
+``source`` s in the ``offlinecdn`` tag.
 
  ::
 
