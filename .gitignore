@@ -4,3 +4,4 @@ example/.offlinecdn/
 example/static
 .coverage
 db.sqlite3
+docs/build
