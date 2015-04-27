@@ -4,20 +4,23 @@ from setuptools import setup
 
 import offlinecdn
 
-# read in the description from README
-with open("README.rst") as stream:
-    long_description = stream.read()
 
 github_url = 'https://github.com/gabegaster/django-offlinecdn'
+
+def read(fname):
+    with open(os.path.join(os.path.dirname(__file__), fname)) as f:
+        return f.readlines()
+
+# read in the description from README
+long_description = "\n".join(read("README.rst"))
 
 # read in the dependencies from the virtualenv requirements file
 dependencies = []
 filename = os.path.join("requirements", "python")
-with open(filename, 'r') as stream:
-    for line in stream:
-        package = line.strip().split('#')[0]
-        if package:
-            dependencies.append(package)
+for line in read(filename):
+    package = line.strip().split('#')[0]
+    if package:
+        dependencies.append(package)
 
 setup(
     name=offlinecdn.__name__,
