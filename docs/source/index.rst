@@ -2,7 +2,7 @@
 
     This package is a work in progress and is not yet available on pypi. This
     documentation should be considered more of a design document for what
-    scrubadub will do someday rather than a specification of what it can do
+    offlinecdn will do someday rather than a specification of what it can do
     today.
 
 offlinecdn
