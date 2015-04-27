@@ -22,7 +22,8 @@ with open(filename, 'r') as stream:
 setup(
     name=offlinecdn.__name__,
     version=offlinecdn.VERSION,
-    description="",
+    description=("A nice way to allow for online-offline development,"
+                 " but also use cdn's for package dependencies."),
     long_description=long_description,
     url=github_url,
     download_url="%s/archives/master" % github_url,
